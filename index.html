@@ -532,29 +532,24 @@ function closeModal() {
   bgVideo.setAttribute('webkit-playsinline', '');
 
   function playNextBg() {
-    bgVideo.src = bgPlaylist[bgIndex];
+    var src = bgPlaylist[bgIndex];
+    console.log('Loading video:', src);
+    bgVideo.src = src;
     bgVideo.load();
     bgIndex = (bgIndex + 1) % bgPlaylist.length;
   }
 
-  function tryPlay() {
-    var p = bgVideo.play();
-    if (p !== undefined) {
-      p.catch(function() {
-        // Autoplay blocked - try again on first user interaction
-        document.addEventListener('touchstart', function once() {
-          bgVideo.play();
-          document.removeEventListener('touchstart', once);
-        }, {once: true});
-        document.addEventListener('click', function once() {
-          bgVideo.play();
-          document.removeEventListener('click', once);
-        }, {once: true});
-      });
-    }
-  }
-
-  bgVideo.addEventListener('canplay', tryPlay);
+  bgVideo.addEventListener('loadeddata', function() {
+    console.log('Video loaded, trying to play...');
+    bgVideo.play().catch(function(e) {
+      console.warn('Autoplay blocked:', e.message);
+    });
+  });
+  bgVideo.addEventListener('error', function() {
+    console.error('Video error:', bgVideo.error ? bgVideo.error.message : 'unknown', '- src:', bgVideo.src);
+    // Skip to next video if current one fails
+    playNextBg();
+  });
   bgVideo.addEventListener('ended', playNextBg);
   playNextBg();
 
