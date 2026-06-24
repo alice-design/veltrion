@@ -29,11 +29,11 @@ body{
 /* ═══ NAV ═══ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 42px;height:72px;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:16px 16px 0;
   background:rgba(2,2,2,.85);backdrop-filter:blur(14px);
 }
-.nav-logo{display:flex;align-self:flex-end;padding-bottom:16px;text-decoration:none}
+.nav-logo{display:flex;text-decoration:none}
 .nav-logo svg{height:32px;width:auto}
 .nav-right{display:flex;align-items:center;gap:32px}
 .lang-sw{display:flex;border-radius:0;overflow:hidden}
@@ -91,7 +91,7 @@ nav{
 .sound-toggle svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5}
 .hero-center{max-width:1100px;position:relative;z-index:2}
 .hero-main{
-  font-size:clamp(44px,8vw,110px);
+  font-size:clamp(44px,5.12vw,70px);
   line-height:.9;letter-spacing:-.02em;
 }
 .hero-sub{
@@ -130,19 +130,38 @@ nav{
 /* ═══ SOLUTIONS ═══ */
 .solutions{padding:160px 42px 140px}
 
-/* Title row: ABOVE the grid */
-.sol-title-row{
+/* Desktop: 50/50 split — grid left, title right */
+.sol-layout{
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+.sol-grid{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:16px;
+  row-gap:0;
+  grid-auto-rows:auto;
+}
+.sol-right{
+  flex:1;
+  position:sticky;
+  top:100px;
+}
+
+/* Title row inside right column */
+.sol-heading-row{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  margin-bottom:48px;
 }
 .sol-heading{
-  font-size:clamp(32px,5.5vw,80px);
+  font-size:clamp(32px,3.52vw,51px);
   line-height:.95;letter-spacing:-.02em;
 }
 .sol-heading-num{
-  font-size:clamp(32px,5.5vw,80px);
+  font-size:clamp(32px,3.52vw,51px);
   line-height:.85;letter-spacing:-.04em;
   color:var(--dim);
 }
@@ -169,8 +188,8 @@ nav{
 }
 .sol-card-name{
   font-family:"galix-mono",monospace;
-  font-size:clamp(14px,1.43vw,19px);
-  font-weight:400;color:var(--text);line-height:1.35;
+  font-size:15px;
+  font-weight:600;color:var(--text);line-height:1.15;
 }
 .sol-card-img{width:100%;aspect-ratio:1/1;overflow:hidden;position:relative;cursor:pointer}
 .sol-card-img video{width:100%;height:100%;object-fit:cover;display:block}
@@ -191,7 +210,7 @@ nav{
 /* ═══ PARTNER ═══ */
 .partner{padding:120px 42px 120px;overflow:hidden}
 .partner-heading{
-  font-size:clamp(32px,5.5vw,80px);
+  font-size:clamp(32px,3.52vw,51px);
   line-height:1.05;letter-spacing:-.03em;margin-bottom:48px;
 }
 .partner-veltrion{color:var(--dim)}
@@ -284,11 +303,13 @@ footer{
 @media(max-width:768px){
   .partner-logos{grid-template-columns:repeat(2,1fr);gap:12px}
   .partner-logo-card{padding:16px}
-  nav{padding:0 20px;height:60px}
+  nav{padding:16px 16px 0}
   .lang-btn{width:44px;height:34px;font-size:12px}
   .contact-btn{height:34px;padding:0 12px;font-size:12px}
   .hero{padding:72px 20px 0;min-height:100vh}
   .solutions{padding:120px 20px 100px}
+  .sol-layout{flex-direction:column;gap:32px}
+  .sol-right{position:static;order:-1}
   .sol-title-row{margin-bottom:32px}
   .partner{padding:80px 20px 80px}
   footer{padding:80px 20px 28px}
@@ -303,7 +324,7 @@ footer{
   .sol-heading{font-size:28px}
   .sol-heading-num{font-size:28px}
   .partner-heading{font-size:28px}
-  .sol-card-name{font-size:12px}
+  .sol-card-name{font-size:13px}
   .sol-tag{font-size:11px;padding:3px 6px}
   .sol-grid{column-gap:10px}
   .event-card{width:275px;right:16px;bottom:16px}
@@ -354,40 +375,46 @@ footer{
 </section>
 
 <section class="solutions" id="solutions">
-  <div class="sol-title-row">
-    <h2 class="sol-heading tf" id="sol-heading">Solutions Projects</h2>
-    <span class="sol-heading-num tf">6</span>
-  </div>
-  <div class="sol-grid">
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s1-name">Disaster relief drone rescue</span></div>
-      <div class="sol-card-img bg1"><video src="./videos/solutions_01.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s1-tags"><span class="sol-tag">Drone</span><span class="sol-tag">GPR</span><span class="sol-tag">Emergency</span></div>
+  <div class="sol-layout">
+    <div class="sol-grid">
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s1-name">Disaster relief drone rescue</span></div>
+        <div class="sol-card-img bg1"><video src="./videos/solutions_01.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s1-tags"><span class="sol-tag">Drone</span><span class="sol-tag">GPR</span><span class="sol-tag">Emergency</span></div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s2-name">Unlicensed full-spectrum private network</span></div>
+        <div class="sol-card-img bg2"><video src="./videos/solutions_02.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s2-tags"><span class="sol-tag">Spectrum</span><span class="sol-tag">Private Network</span></div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s3-name">Underground tunnel communication</span></div>
+        <div class="sol-card-img bg3"><video src="./videos/solutions_03.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s3-tags"><span class="sol-tag">Tunnel</span><span class="sol-tag">Engineering</span></div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s4-name">Maritime communication</span></div>
+        <div class="sol-card-img bg6"><video src="./videos/solutions_04.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s4-tags"><span class="sol-tag">Maritime</span><span class="sol-tag">Naval</span></div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s5-name">High-speed roaming</span></div>
+        <div class="sol-card-img bg4"><video src="./videos/solutions_05.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s5-tags"><span class="sol-tag">Rail</span><span class="sol-tag">Roaming</span><span class="sol-tag">HSR</span></div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-card-head"><span class="sol-card-name" id="s6-name">Smart factory</span></div>
+        <div class="sol-card-img bg5"><video src="./videos/solutions_06.mp4" muted playsinline preload="metadata"></video></div>
+        <div class="sol-card-tags" id="s6-tags"><span class="sol-tag">IoT</span><span class="sol-tag">Digital Twin</span><span class="sol-tag">Industry</span></div>
+      </div>
     </div>
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s2-name">Unlicensed full-spectrum private network</span></div>
-      <div class="sol-card-img bg2"><video src="./videos/solutions_02.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s2-tags"><span class="sol-tag">Spectrum</span><span class="sol-tag">Private Network</span></div>
-    </div>
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s3-name">Underground tunnel communication</span></div>
-      <div class="sol-card-img bg3"><video src="./videos/solutions_03.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s3-tags"><span class="sol-tag">Tunnel</span><span class="sol-tag">Engineering</span></div>
-    </div>
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s4-name">Maritime communication</span></div>
-      <div class="sol-card-img bg6"><video src="./videos/solutions_04.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s4-tags"><span class="sol-tag">Maritime</span><span class="sol-tag">Naval</span></div>
-    </div>
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s5-name">High-speed roaming</span></div>
-      <div class="sol-card-img bg4"><video src="./videos/solutions_05.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s5-tags"><span class="sol-tag">Rail</span><span class="sol-tag">Roaming</span><span class="sol-tag">HSR</span></div>
-    </div>
-    <div class="sol-card">
-      <div class="sol-card-head"><span class="sol-card-name" id="s6-name">Smart factory</span></div>
-      <div class="sol-card-img bg5"><video src="./videos/solutions_06.mp4" muted playsinline preload="metadata"></video></div>
-      <div class="sol-card-tags" id="s6-tags"><span class="sol-tag">IoT</span><span class="sol-tag">Digital Twin</span><span class="sol-tag">Industry</span></div>
+    <div class="sol-right">
+      <div class="sol-title-block">
+        <div class="sol-heading-row">
+          <h2 class="sol-heading tf" id="sol-heading">Solutions Projects</h2>
+          <span class="sol-heading-num tf">6</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -421,6 +448,15 @@ footer{
   </div>
 </footer>
 
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-qr" src="./img/qr.png" alt="QR Code">
+    <p class="modal-text" id="modal-text">Partner with Dr. Zhong to Accelerate Your Goals</p>
+  </div>
+</div>
+
 <script>
 var copy = {
   zh: {
@@ -440,7 +476,7 @@ var copy = {
     partnerHeading: '與<span class="partner-veltrion">威特聯</span>共同建造',
     partnerDesc: "由台灣頂尖博士團隊領軍，我們成功跨越前瞻學術科研與產業實務應用的鴻溝。透過與國立大學及指標企業的戰略合作，共同打造全方位整合的次世代網通科技解決方案。",
     footerTagline: "無線通訊科技<br>從實驗室走向市場",
-    modalText: "聯繫鍾博士\n啟動您的次世代佈局"
+    modalText: "聯繫鍾博士<br>啟動您的次世代佈局"
   },
   en: {
     contact: "Get in Touch",
@@ -459,7 +495,7 @@ var copy = {
     partnerHeading: 'Building with <span class="partner-veltrion">VELTRION</span>',
     partnerDesc: "Led by PhD experts in Taiwan, we bridge advanced academic research and industrial application. We partner with national universities and major enterprises to build integrated, next-gen technology solutions.",
     footerTagline: "Wireless Connectivity.<br>From Lab to Market.",
-    modalText: "Partner with Dr. Zhong\nto Accelerate Your Goals"
+    modalText: "Partner with Dr. Zhong<br>to Accelerate Your Goals"
   }
 };
 
@@ -491,7 +527,7 @@ function setLang(lang) {
   document.getElementById('partner-heading').innerHTML = d.partnerHeading;
   document.getElementById('partner-desc').textContent = d.partnerDesc;
   document.getElementById('footer-tagline').innerHTML = d.footerTagline;
-  document.getElementById('modal-text').textContent = d.modalText;
+  document.getElementById('modal-text').innerHTML = d.modalText;
   document.getElementById('btn-lang').textContent = lang === 'en' ? '繁中' : 'EN';
   document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
 }
@@ -596,14 +632,5 @@ function closeModal() {
   });
 })();
 </script>
-<!-- CONTACT MODAL -->
-<div class="modal-overlay" id="contact-modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-card">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <img class="modal-qr" src="./img/qr.png" alt="QR Code">
-    <p class="modal-text" id="modal-text">Partner with Dr. Zhong to Accelerate Your Goals</p>
-  </div>
-</div>
-
 </body>
 </html>
