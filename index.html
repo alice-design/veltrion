@@ -519,13 +519,17 @@ function closeModal() {
   ];
   var bgIndex = 0;
   var bgVideo = document.getElementById('hero-bg-video');
+  bgVideo.muted = true;
 
   function playNextBg() {
     bgVideo.src = bgPlaylist[bgIndex];
-    bgVideo.play().catch(function(){});
+    bgVideo.load();
     bgIndex = (bgIndex + 1) % bgPlaylist.length;
   }
 
+  bgVideo.addEventListener('canplay', function() {
+    bgVideo.play().catch(function(e){ console.log('Autoplay blocked:', e); });
+  });
   bgVideo.addEventListener('ended', playNextBg);
   playNextBg();
 
