@@ -31,7 +31,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:flex-start;justify-content:space-between;
   padding:16px 16px 0;
-  background:rgba(2,2,2,.85);backdrop-filter:blur(14px);
+  background:transparent;
 }
 .nav-logo{display:flex;text-decoration:none}
 .nav-logo svg{height:32px;width:auto}
@@ -73,10 +73,11 @@ nav{
   width:100%;height:100%;
   object-fit:cover;
   display:block;
+  transform:scale(1.12) translate(-2%,-2%);
 }
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
-  background:rgba(0,0,0,0.08);
+  background:rgba(0,0,0,0.15);
 }
 .sound-toggle{
   position:absolute;left:42px;bottom:42px;z-index:3;
@@ -295,6 +296,11 @@ footer{
   font-size:15px;color:var(--dim);
   line-height:1.6;
 }
+.modal-link-text{
+  font-size:15px;color:#fff;
+  line-height:1.6;margin-top:12px;
+}
+.modal-link-text a{color:#fff;text-decoration:underline}
 
 /* ═══ RWD ═══ */
 @media(max-width:1024px){
@@ -348,7 +354,7 @@ footer{
 
 <section class="hero" id="home">
   <div class="hero-video-bg">
-    <video id="hero-bg-video" muted playsinline webkit-playsinline autoplay></video>
+    <video id="hero-bg-video" src="./videos/index.mp4" muted playsinline webkit-playsinline autoplay loop></video>
   </div>
   <div class="hero-overlay"></div>
   <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" aria-label="Toggle sound">
@@ -356,7 +362,7 @@ footer{
     <svg id="icon-unmuted" viewBox="0 0 24 24" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
   </button>
   <div class="hero-center">
-    <h1 class="hero-main tf" id="hero-main">Connecting now, not someday</h1>
+    <h1 class="hero-main tf" id="hero-main">Signals Now, Not Someday</h1>
     <p class="hero-sub" id="hero-sub">The Wireless Infrastructure for Next-Gen Tech</p>
   </div>
   <a href="https://www.futuretest.ai/event/rs-drone/" target="_blank" class="event-card" style="text-decoration:none">
@@ -453,7 +459,8 @@ footer{
   <div class="modal-card">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <img class="modal-qr" src="./img/qr.png" alt="QR Code">
-    <p class="modal-text" id="modal-text">Partner with Dr. Zhong to Accelerate Your Goals</p>
+    <p class="modal-text" id="modal-text">Partner with Dr. Zhong<br>to Accelerate Your Goals</p>
+    <p class="modal-link-text" id="modal-link"></p>
   </div>
 </div>
 
@@ -461,7 +468,7 @@ footer{
 var copy = {
   zh: {
     contact: "立即諮詢",
-    heroMain: "實現連結，就在當下",
+    heroMain: "即刻啟動訊號&emsp;拒絕等待未來",
     heroSub: "佈局次世代核心無線基礎設施",
     eventLabel: "活動",
     eventTitle: "從研發到創新 : 無人機載具驗證與量測技術研討會",
@@ -476,11 +483,12 @@ var copy = {
     partnerHeading: '與<span class="partner-veltrion">威特聯</span>共同建造',
     partnerDesc: "由台灣頂尖博士團隊領軍，我們成功跨越前瞻學術科研與產業實務應用的鴻溝。透過與國立大學及指標企業的戰略合作，共同打造全方位整合的次世代網通科技解決方案。",
     footerTagline: "無線通訊科技<br>從實驗室走向市場",
-    modalText: "聯繫鍾博士<br>啟動您的次世代佈局"
+    modalText: "聯繫鍾博士<br>啟動您的次世代佈局",
+    modalLink: "掃描或點擊<a href='https://docs.google.com/forms/d/e/1FAIpQLSfnapLz5pTF7Etu4G6TivC7cQlsiALxctGNQuG1g552R-n3VA/viewform' target='_blank'>連結</a>填寫訊息"
   },
   en: {
     contact: "Get in Touch",
-    heroMain: "Connecting now, not someday",
+    heroMain: "Signals Now, Not Someday",
     heroSub: "The Wireless Infrastructure for Next-Gen Tech",
     eventLabel: "EVENT",
     eventTitle: "From R&D to Innovation: A Seminar on Unmanned Aerial Vehicle Verification and Measurement Technologies",
@@ -495,7 +503,8 @@ var copy = {
     partnerHeading: 'Building with <span class="partner-veltrion">VELTRION</span>',
     partnerDesc: "Led by PhD experts in Taiwan, we bridge advanced academic research and industrial application. We partner with national universities and major enterprises to build integrated, next-gen technology solutions.",
     footerTagline: "Wireless Connectivity.<br>From Lab to Market.",
-    modalText: "Partner with Dr. Zhong<br>to Accelerate Your Goals"
+    modalText: "Partner with Dr. Zhong<br>to Accelerate Your Goals",
+    modalLink: "Scan or click the <a href='https://docs.google.com/forms/d/e/1FAIpQLSfnapLz5pTF7Etu4G6TivC7cQlsiALxctGNQuG1g552R-n3VA/viewform' target='_blank'>link</a> to fill in the information"
   }
 };
 
@@ -513,7 +522,7 @@ function setLang(lang) {
   currentLang = lang;
   var d = copy[lang];
   document.getElementById('contact-label').textContent = d.contact;
-  document.getElementById('hero-main').textContent = d.heroMain;
+  document.getElementById('hero-main').innerHTML = d.heroMain;
   document.getElementById('hero-sub').textContent = d.heroSub;
   document.getElementById('event-label').textContent = d.eventLabel;
   document.getElementById('event-title').textContent = d.eventTitle;
@@ -528,6 +537,7 @@ function setLang(lang) {
   document.getElementById('partner-desc').textContent = d.partnerDesc;
   document.getElementById('footer-tagline').innerHTML = d.footerTagline;
   document.getElementById('modal-text').innerHTML = d.modalText;
+  document.getElementById('modal-link').innerHTML = d.modalLink;
   document.getElementById('btn-lang').textContent = lang === 'en' ? '繁中' : 'EN';
   document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
 }
@@ -551,43 +561,15 @@ function closeModal() {
 
   var nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
   setLang(nav.indexOf('zh') === 0 ? 'zh' : 'en');
-  // Hero background video playlist
-  var bgPlaylist = [
-    './videos/solutions_01.mp4',
-    './videos/solutions_02.mp4',
-    './videos/solutions_03.mp4',
-    './videos/solutions_04.mp4',
-    './videos/solutions_05.mp4',
-    './videos/solutions_06.mp4'
-  ];
-  var bgIndex = 0;
+  // Hero background video
   var bgVideo = document.getElementById('hero-bg-video');
   bgVideo.muted = true;
-  bgVideo.setAttribute('muted', '');
-  bgVideo.setAttribute('playsinline', '');
-  bgVideo.setAttribute('webkit-playsinline', '');
-
-  function playNextBg() {
-    var src = bgPlaylist[bgIndex];
-    console.log('Loading video:', src);
-    bgVideo.src = src;
-    bgVideo.load();
-    bgIndex = (bgIndex + 1) % bgPlaylist.length;
-  }
-
-  bgVideo.addEventListener('loadeddata', function() {
-    console.log('Video loaded, trying to play...');
-    bgVideo.play().catch(function(e) {
-      console.warn('Autoplay blocked:', e.message);
-    });
+  bgVideo.play().catch(function() {
+    document.addEventListener('touchstart', function once() {
+      bgVideo.play();
+      document.removeEventListener('touchstart', once);
+    }, {once: true});
   });
-  bgVideo.addEventListener('error', function() {
-    console.error('Video error:', bgVideo.error ? bgVideo.error.message : 'unknown', '- src:', bgVideo.src);
-    // Skip to next video if current one fails
-    playNextBg();
-  });
-  bgVideo.addEventListener('ended', playNextBg);
-  playNextBg();
 
   // Sound toggle
   window.toggleSound = function() {
