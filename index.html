@@ -2,12 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1LETX814JX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1LETX814JX');
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>VELTRION</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/xep3onb.css">
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'xep3onb',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -19,12 +37,12 @@
 }
 html{scroll-behavior:smooth;background:var(--bg)}
 body{
-  font-family:"soleil",sans-serif;
+  font-family:"soleil","PingFang TC","Noto Sans TC",sans-serif;
   background:var(--bg);color:var(--text);
   overflow-x:hidden;font-weight:400;
   -webkit-font-smoothing:antialiased;
 }
-.tf{font-family:"TASA Explorer",sans-serif;font-weight:600}
+.tf{font-family:"mangal","Noto Sans TC",sans-serif;font-weight:700}
 
 /* ═══ NAV ═══ */
 nav{
@@ -79,21 +97,10 @@ nav{
   position:absolute;inset:0;z-index:1;
   background:rgba(0,0,0,0.15);
 }
-.sound-toggle{
-  position:absolute;left:42px;bottom:42px;z-index:3;
-  width:40px;height:40px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:0;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-}
-.sound-toggle:hover{background:rgba(255,255,255,.2)}
-.sound-toggle svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5}
-.hero-center{max-width:1100px;position:relative;z-index:2}
+.hero-center{max-width:1100px;position:relative;z-index:5}
 .hero-main{
   font-size:clamp(44px,5.12vw,70px);
-  line-height:.9;letter-spacing:-.02em;
+  line-height:1.1;letter-spacing:-.02em;
 }
 .hero-sub{
   font-size:clamp(20px,2.55vw,29px);
@@ -103,7 +110,7 @@ nav{
 
 /* ─ EVENT CARD ─ */
 .event-card{
-  position:absolute;right:42px;bottom:42px;z-index:3;
+  position:absolute;right:42px;bottom:42px;z-index:5;
   width:300px;background:#fff;
   display:grid;grid-template-columns:auto 1fr;column-gap:9px;
   overflow:hidden;
@@ -156,6 +163,7 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
+  gap:1em;
 }
 .sol-heading{
   font-size:clamp(32px,3.52vw,51px);
@@ -250,7 +258,7 @@ footer{
 }
 .footer-top{display:flex;flex-direction:column;gap:16px}
 .footer-logo{
-  font-family:"TASA Explorer",sans-serif;
+  font-family:"mangal","Noto Sans TC",sans-serif;
   font-size:28px;font-weight:700;letter-spacing:.12em;color:var(--text);
 }
 .footer-logo em{color:var(--brand);font-style:normal}
@@ -312,14 +320,15 @@ footer{
   nav{padding:16px 16px 0}
   .lang-btn{width:44px;height:34px;font-size:12px}
   .contact-btn{height:34px;padding:0 12px;font-size:12px}
-  .hero{padding:72px 20px 0;min-height:100vh}
-  .solutions{padding:120px 20px 100px}
+  .hero{padding:72px 16px 0;min-height:100vh}
+  .solutions{padding:120px 16px 100px}
   .sol-layout{flex-direction:column;gap:32px}
   .sol-right{position:static;order:-1}
+  .sol-grid{grid-template-columns:1fr;column-gap:0;width:100%}
   .sol-title-row{margin-bottom:32px}
-  .partner{padding:80px 20px 80px}
-  footer{padding:80px 20px 28px}
-  .event-card{width:290px;right:20px;bottom:24px}
+  .partner{padding:80px 16px 80px}
+  footer{padding:80px 16px 28px}
+  .event-card{width:290px;right:16px;bottom:24px}
   .event-content{padding:11px}
   .event-title{font-size:12px}
   .event-desc{font-size:11px}
@@ -357,10 +366,6 @@ footer{
     <video id="hero-bg-video" src="./videos/index.mp4" muted playsinline webkit-playsinline autoplay loop></video>
   </div>
   <div class="hero-overlay"></div>
-  <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" aria-label="Toggle sound">
-    <svg id="icon-muted" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-    <svg id="icon-unmuted" viewBox="0 0 24 24" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
-  </button>
   <div class="hero-center">
     <h1 class="hero-main tf" id="hero-main">Signals Now, Not Someday</h1>
     <p class="hero-sub" id="hero-sub">The Wireless Infrastructure for Next-Gen Tech</p>
@@ -468,7 +473,7 @@ footer{
 var copy = {
   zh: {
     contact: "立即諮詢",
-    heroMain: "即刻啟動訊號&emsp;拒絕等待未來",
+    heroMain: "即刻啟動訊號<br>拒絕等待未來",
     heroSub: "佈局次世代核心無線基礎設施",
     eventLabel: "活動",
     eventTitle: "從研發到創新 : 無人機載具驗證與量測技術研討會",
@@ -564,19 +569,6 @@ function closeModal() {
   // Hero background video
   var bgVideo = document.getElementById('hero-bg-video');
   bgVideo.muted = true;
-  bgVideo.play().catch(function() {
-    document.addEventListener('touchstart', function once() {
-      bgVideo.play();
-      document.removeEventListener('touchstart', once);
-    }, {once: true});
-  });
-
-  // Sound toggle
-  window.toggleSound = function() {
-    bgVideo.muted = !bgVideo.muted;
-    document.getElementById('icon-muted').style.display = bgVideo.muted ? 'block' : 'none';
-    document.getElementById('icon-unmuted').style.display = bgVideo.muted ? 'none' : 'block';
-  };
 
   // Video hover-to-play (desktop) / tap-to-play (mobile)
   var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
